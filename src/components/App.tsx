@@ -25,7 +25,7 @@ import usePrevious from '../hooks/usePrevious';
 // import Test from './test/TestSvg';
 import Auth from './auth/Auth';
 import UiLoader from './common/UiLoader';
-import AiGramTask from './left/aigram/AiGramTask';
+import Task from './left/dinero/Task';
 import AppInactive from './main/AppInactive';
 import LockScreen from './main/LockScreen.async';
 import Main from './main/Main.async';
@@ -40,7 +40,7 @@ type StateProps = {
   isInactiveAuth?: boolean;
   hasWebAuthTokenFailed?: boolean;
   theme: ThemeKey;
-  aigramIsInApp: boolean;
+  dineroIsInApp: boolean;
 };
 
 enum AppScreens {
@@ -60,7 +60,7 @@ const App: FC<StateProps> = ({
   isInactiveAuth,
   hasWebAuthTokenFailed,
   theme,
-  aigramIsInApp
+  dineroIsInApp
 }) => {
   const { disconnect } = getActions();
 
@@ -187,8 +187,8 @@ const App: FC<StateProps> = ({
 
   // eslint-disable-next-line consistent-return
   function renderContent() {
-    if (aigramIsInApp) {
-      return <AiGramTask />;
+    if (dineroIsInApp) {
+      return <Task />;
     }
 
     switch (activeKey) {
@@ -241,7 +241,7 @@ export default withGlobal(
       isInactiveAuth: selectTabState(global).isInactive,
       hasWebAuthTokenFailed: global.hasWebAuthTokenFailed || global.hasWebAuthTokenPasswordRequired,
       theme: selectTheme(global),
-      aigramIsInApp: global.aigramIsInApp,
+      dineroIsInApp: global.dineroIsInApp,
     };
   },
 )(App);

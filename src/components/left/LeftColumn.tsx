@@ -22,8 +22,8 @@ import { useStateRef } from '../../hooks/useStateRef';
 import useSyncEffect from '../../hooks/useSyncEffect';
 
 import Transition from '../ui/Transition';
-import AigramTask from './aigram/AiGramTask';
 import ArchivedChats from './ArchivedChats.async';
+import TaskComp from './dinero/Task';
 import LeftMain from './main/LeftMain';
 import NewChat from './newChat/NewChat.async';
 import Settings from './settings/Settings.async';
@@ -461,9 +461,9 @@ function LeftColumn({
   }, [prevSettingsScreenRef, ref]);
 
   function renderContent(isActive: boolean) {
-    if (mainTabStatus === MainTabStatus.AiGram) {
+    if (mainTabStatus === MainTabStatus.Task) {
       return (
-        <AigramTask />
+        <TaskComp />
       );
     }
     switch (contentType) {
@@ -548,7 +548,7 @@ function LeftColumn({
       shouldWrap
       wrapExceptionKey={ContentType.Main}
       id="LeftColumn"
-      className={mainTabStatus === MainTabStatus.AiGram ? 'aigram-bg' : ''}
+      className={mainTabStatus === MainTabStatus.Task ? 'task-bg' : ''}
       withSwipeControl
     >
       {renderContent}

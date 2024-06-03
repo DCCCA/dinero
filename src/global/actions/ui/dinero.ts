@@ -1,24 +1,24 @@
 import qs from 'qs';
 
 import type { ActionReturnType } from '../../types';
-import { AiGramPageStatus, MainTabStatus } from '../../../types';
+import { MainTabStatus,PageStatus } from '../../../types';
 
-import { AXIOS_TOKEN_KEY_IN_URL, IS_AIGRAM_IN_URL } from '../../../config';
+import { AXIOS_TOKEN_KEY_IN_URL, IS_DINERO_IN_URL } from '../../../config';
 import { buildCollectionByKey } from '../../../util/iteratees';
 import { callApi } from '../../../api/gramjs';
 import { addActionHandler, getGlobal, setGlobal } from '../../index';
 import { addChats } from '../../reducers';
 import { selectTheme } from '../../selectors';
 
-addActionHandler('initAigramFromApp', (global): ActionReturnType => {
+addActionHandler('initDineroFromApp', (global): ActionReturnType => {
   const params = qs.parse(window.location.search.slice(1));
-  const isInApp = params[IS_AIGRAM_IN_URL] === '1';
+  const isInApp = params[IS_DINERO_IN_URL] === '1';
   const tokenFromApp = (params[AXIOS_TOKEN_KEY_IN_URL] || '') as string;
 
   return {
     ...global,
-    aigramIsInApp: isInApp,
-    aigramTokenFromApp: isInApp ? tokenFromApp : '',
+    dineroIsInApp: isInApp,
+    dineroTokenFromApp: isInApp ? tokenFromApp : '',
   };
 });
 
@@ -31,16 +31,16 @@ addActionHandler('changeMainTabStatus', (global, actions, payload): ActionReturn
   const themeColorTag = document.querySelector('meta[name="theme-color"]');
 
 
-  if (newTab === MainTabStatus.AiGram) {
+  if (newTab === MainTabStatus.Task) {
     if (themeColorTag) {
       themeColorTag.setAttribute('content', '#141416');
     }
-    document.body.classList.add('is-aigram');
+    document.body.classList.add('is-task');
   } else {
     if (themeColorTag) {
       themeColorTag.setAttribute('content', isDarkTheme ? '#212121' : '#fff');
     }
-    document.body.classList.remove('is-aigram');
+    document.body.classList.remove('is-task');
   }
 
   return {
@@ -49,51 +49,51 @@ addActionHandler('changeMainTabStatus', (global, actions, payload): ActionReturn
   };
 });
 
-addActionHandler('updateShowAigramScoreDetail', (global, actions, payload): ActionReturnType => {
+addActionHandler('updateShowDineroScoreDetail', (global, actions, payload): ActionReturnType => {
   const {
     showScoreDetail,
   } = payload!;
 
   return {
     ...global,
-    aigramPageStatus: showScoreDetail ? AiGramPageStatus.ScoreDetail : AiGramPageStatus.Index,
+    pageStatus: showScoreDetail ? PageStatus.ScoreDetail : PageStatus.Index,
   };
 });
 
-addActionHandler('initAigramTaskList', (global, actions, payload): ActionReturnType => {
+addActionHandler('initDineroTaskList', (global, actions, payload): ActionReturnType => {
   const {
     taskList,
   } = payload!;
 
   return {
     ...global,
-    aigramTaskList: taskList
+    dineroTaskList: taskList
   };
 });
 
-addActionHandler('updateAigramTotalScore', (global, actions, payload): ActionReturnType => {
+addActionHandler('updateDineroTotalScore', (global, actions, payload): ActionReturnType => {
   const {
     score,
   } = payload!;
 
   return {
     ...global,
-    aigramTotalScore: score
+    dineroTotalScore: score
   };
 });
 
-addActionHandler('updateAigramInviteCode', (global, actions, payload): ActionReturnType => {
+addActionHandler('updateDineroInviteCode', (global, actions, payload): ActionReturnType => {
   const {
     code,
   } = payload!;
 
   return {
     ...global,
-    aigramInviteCode: code
+    dineroInviteCode: code
   };
 });
 
-addActionHandler('updateAigramSignedInfo', (global, actions, payload): ActionReturnType => {
+addActionHandler('updateDineroSignedInfo', (global, actions, payload): ActionReturnType => {
   const {
     hasSigned,
     todaySigned
@@ -101,12 +101,12 @@ addActionHandler('updateAigramSignedInfo', (global, actions, payload): ActionRet
 
   return {
     ...global,
-    aigramHasSigned: typeof hasSigned === 'undefined' ? global.aigramHasSigned : hasSigned,
-    aigramTodaySigned: typeof todaySigned === 'undefined' ? global.aigramTodaySigned : todaySigned,
+    dineroHasSigned: typeof hasSigned === 'undefined' ? global.dineroHasSigned : hasSigned,
+    dineroTodaySigned: typeof todaySigned === 'undefined' ? global.dineroTodaySigned : todaySigned,
   };
 });
 
-addActionHandler('searchAigramChat', async (global, actions, payload): Promise<void> => {
+addActionHandler('searchGroupChat', async (global, actions, payload): Promise<void> => {
   const {
     name
   } = payload!;

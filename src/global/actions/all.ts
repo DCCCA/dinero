@@ -16,7 +16,7 @@ import './api/reactions';
 import './api/statistics';
 import './api/stories';
 import './ui/initial';
-import './ui/aigram';
+import './ui/dinero';
 import './ui/chats';
 import './ui/messages';
 import './ui/globalSearch';

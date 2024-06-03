@@ -63,7 +63,7 @@ async function init() {
 
   getActions().initShared();
   getActions().init();
-  getActions().initAigramFromApp();
+  getActions().initDineroFromApp();
 
   getActions().updateShouldEnableDebugLog();
   getActions().updateShouldDebugExportedSenders();

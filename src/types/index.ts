@@ -259,15 +259,14 @@ export enum LeftColumnContent {
   NewChannelStep2,
   NewGroupStep1,
   NewGroupStep2,
-  AiGramScoreDetail,
 }
 
 export enum MainTabStatus {
   TeleGram,
-  AiGram,
+  Task,
 }
 
-export enum AiGramPageStatus {
+export enum PageStatus {
   Index,
   ScoreDetail,
   EventList,

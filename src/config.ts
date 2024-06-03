@@ -2,12 +2,12 @@ import type { ApiReactionEmoji } from './api/types';
 import type { ApiLimitType } from './global/types';
 
 export const APP_CODE_NAME = 'A';
-export const APP_NAME = process.env.APP_NAME || `AiGram Web ${APP_CODE_NAME}`;
+export const APP_NAME = process.env.APP_NAME || `Dinero Web ${APP_CODE_NAME}`;
 export const RELEASE_DATETIME = process.env.RELEASE_DATETIME;
 
-export const PRODUCTION_HOSTNAME = 'aigram.chat';
-export const PRODUCTION_URL = 'https://aigram.chat/a';
-export const WEB_VERSION_BASE = 'https://aigram.chat/'; // Used to redirect to other versions
+export const PRODUCTION_HOSTNAME = 'dinero.zone';
+export const PRODUCTION_URL = 'https://dinero.zone/a';
+export const WEB_VERSION_BASE = 'https://dinero.zone/'; // Used to redirect to other versions
 export const BASE_URL = process.env.BASE_URL;
 
 export const IS_MOCKED_CLIENT = process.env.APP_MOCKED_CLIENT === '1';
@@ -343,7 +343,7 @@ export const DEFAULT_LIMITS: Record<ApiLimitType, readonly [number, number]> = {
 };
 
 // 请求相关
-export const AXIOS_BASE_URL = 'https://api.aigram.chat';
+export const AXIOS_BASE_URL = 'https://api.dinero.zone';
 export const AXIOS_AUTH_TOKEN = 'tt-axios-token';
-export const IS_AIGRAM_IN_URL = 'aigram_is_app';
-export const AXIOS_TOKEN_KEY_IN_URL = 'aigram_token';
+export const IS_DINERO_IN_URL = 'dinero_is_app';
+export const AXIOS_TOKEN_KEY_IN_URL = 'dinero_token';

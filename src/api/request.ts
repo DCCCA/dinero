@@ -9,12 +9,12 @@ const instance = axios.create();
 instance.defaults.baseURL = AXIOS_BASE_URL;
 
 instance.interceptors.request.use(async (config) => {
-  const { aigramIsInApp, aigramTokenFromApp } = getGlobal();
+  const { dineroIsInApp, dineroTokenFromApp } = getGlobal();
 
   let AUTH_TOKEN = localStorage.getItem(AXIOS_AUTH_TOKEN);
 
-  if (aigramIsInApp && aigramTokenFromApp) {
-    AUTH_TOKEN = aigramTokenFromApp;
+  if (dineroIsInApp && dineroTokenFromApp) {
+    AUTH_TOKEN = dineroTokenFromApp;
   }
 
   if (config.url !== '/apis/v1/auto_user_login' && config.url !== '/apis/v1/statistics/login_report') {
@@ -82,7 +82,7 @@ export function login() {
   return LOGIN_PROMISE;
 }
 
-export function logoutAigram() {
+export function logout() {
   localStorage.removeItem(AXIOS_AUTH_TOKEN);
 }
 

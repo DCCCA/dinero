@@ -5,15 +5,15 @@ import { getActions } from '../../../../global';
 import { getScoreDetailList } from '../../../../api/axios/task';
 
 import Button from '../../../ui/Button';
-import { TaskTitleHash, TaskType } from '../AiGramTaskItem';
+import { TaskTitleHash, TaskType } from '../TaskItem';
 
-import "./AiGramScoreDetail.scss";
+import "./ScoreDetail.scss";
 
-import TaskIcon3 from '../../../../assets/aigram/bind.png';
-import TaskIcon4 from '../../../../assets/aigram/daily.png';
-import EmptyIcon from '../../../../assets/aigram/empty.png';
-import TaskIcon1 from '../../../../assets/aigram/follow.png';
-import TaskIcon2 from '../../../../assets/aigram/invite.png';
+import TaskIcon3 from '../../../../assets/dinero/bind.png';
+import TaskIcon4 from '../../../../assets/dinero/daily.png';
+import EmptyIcon from '../../../../assets/dinero/empty.png';
+import TaskIcon1 from '../../../../assets/dinero/follow.png';
+import TaskIcon2 from '../../../../assets/dinero/invite.png';
 
 interface ScoreDetail {
   type: TaskType;
@@ -33,9 +33,9 @@ const TaskIconHash = {
 interface OwnProps {
 }
 
-const AiGramScoreDetail: FC<OwnProps> = () => {
+const ScoreDetailComp: FC<OwnProps> = () => {
   const {
-    updateShowAigramScoreDetail,
+    updateShowDineroScoreDetail,
   } = getActions();
 
   const [hasInit, setHasInit] = useState(false);
@@ -59,7 +59,7 @@ const AiGramScoreDetail: FC<OwnProps> = () => {
   }
 
   const onBack = useCallback(() => {
-    updateShowAigramScoreDetail({ showScoreDetail: false });
+    updateShowDineroScoreDetail({ showScoreDetail: false });
   }, []);
 
   function renderCurrentSection() {
@@ -115,4 +115,4 @@ const AiGramScoreDetail: FC<OwnProps> = () => {
   return renderCurrentSection();
 };
 
-export default memo(AiGramScoreDetail);
+export default memo(ScoreDetailComp);

@@ -10,7 +10,7 @@ import type { GlobalState } from '../../global/types';
 import type { LangCode } from '../../types';
 
 import { pick } from '../../util/iteratees';
-import { logLoginState } from '../../util/logAiGram';
+import { logLoginState } from '../../util/logDinero';
 import { IS_TOUCH_ENV } from '../../util/windowEnvironment';
 import { LOGIN_LOG_ERROR_TYPE } from '../../api/axios/login';
 import renderText from '../common/helpers/renderText';

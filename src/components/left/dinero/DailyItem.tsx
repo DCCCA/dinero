@@ -6,11 +6,11 @@ import buildClassName from "../../../util/buildClassName";
 import { completeTask } from "../../../api/axios/task";
 
 import Button from "../../ui/Button";
-import { TaskType } from "./AiGramTaskItem";
+import { TaskType } from "./TaskItem";
 
-import CompleteIcon from "../../../assets/aigram/complete.png";
-import TaskGift from "../../../assets/aigram/gift.png";
-import TaskGiftDisabled from "../../../assets/aigram/gift_disabled.png";
+import CompleteIcon from "../../../assets/dinero/complete.png";
+import TaskGift from "../../../assets/dinero/gift.png";
+import TaskGiftDisabled from "../../../assets/dinero/gift_disabled.png";
 
 interface OwnProps {
   hasSigned: number;
@@ -26,7 +26,7 @@ interface StateProps {
 const DAY_LIST = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'];
 const SCORE_LIST = [1, 1, 1, 1, 1, 1, 5];
 
-const AiGramDailyItem: FC<StateProps & OwnProps> = (props) => {
+const DailyItem: FC<StateProps & OwnProps> = (props) => {
   const { hasSigned, today, todayHasSigned, isInApp, onComplete } = props;
 
   const {
@@ -91,7 +91,7 @@ const AiGramDailyItem: FC<StateProps & OwnProps> = (props) => {
 export default memo(withGlobal<OwnProps>(
   (global): StateProps => {
     return {
-      isInApp: global.aigramIsInApp,
+      isInApp: global.dineroIsInApp,
     };
   },
-)(AiGramDailyItem));
+)(DailyItem));

@@ -14,7 +14,7 @@ import { getCurrentTabId } from '../../../util/establishMultitabRole';
 import { getShippingError, shouldClosePaymentModal } from '../../../util/getReadableErrorText';
 import { unique } from '../../../util/iteratees';
 import { setLanguage } from '../../../util/langProvider';
-import { logLoginState } from '../../../util/logAiGram';
+import { logLoginState } from '../../../util/logDinero';
 import { clearWebTokenAuth } from '../../../util/routing';
 import { setServerTimeOffset } from '../../../util/serverTime';
 import { forceWebsync } from '../../../util/websync';

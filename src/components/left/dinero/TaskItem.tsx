@@ -11,11 +11,11 @@ import { completeJoinTask } from "../../../api/axios/task";
 
 import Button from "../../ui/Button";
 
-import NextIcon from '../../../assets/aigram/next.png';
-import TipsIcon from '../../../assets/aigram/score_q.png';
-import TaskIcon1 from '../../../assets/aigram/task_1.png';
-import TaskIcon2 from '../../../assets/aigram/task_2.png';
-import TaskIcon3 from '../../../assets/aigram/task_3.png';
+import NextIcon from '../../../assets/dinero/next.png';
+import TipsIcon from '../../../assets/dinero/score_q.png';
+import TaskIcon1 from '../../../assets/dinero/task_1.png';
+import TaskIcon2 from '../../../assets/dinero/task_2.png';
+import TaskIcon3 from '../../../assets/dinero/task_3.png';
 
 export enum TaskType {
   DAILY = 1,
@@ -34,7 +34,7 @@ export const TaskIconHash = {
 export const TaskTitleHash = {
   [TaskType.DAILY]: "Daily Sign",
   [TaskType.INVITE]: "Invite friend tasks",
-  [TaskType.FOLLOW]: "Joining AiGram group earns 5 points.",
+  [TaskType.FOLLOW]: "Joining Dinero group earns 5 points.",
   [TaskType.BIND]: "Bind Telegram Account",
 } as const;
 
@@ -56,9 +56,9 @@ export interface TaskItem {
   tips?: string;
 }
 
-const JOIN_TASK_GROUP_URL = 'https://t.me/AIGramLab';
-const GROUP_CHAT_ID = '-1002123962275';
-const GROUP_NAME = 'aigramLab';
+const JOIN_TASK_GROUP_URL = 'https://t.me/DineroLabs';
+const GROUP_CHAT_ID = '-1002237895362';
+const GROUP_NAME = 'DineroLabs';
 
 export interface OwnProps {
   taskInfo: TaskItem;
@@ -79,13 +79,13 @@ declare global {
   }
 }
 
-const AiGramTaskItem: FC<StateProps & OwnProps> = (props) => {
+const TaskItemComp: FC<StateProps & OwnProps> = (props) => {
   const { taskInfo, inviteCode, isInApp, currentUserInfo } = props;
   const { type, tips } = taskInfo;
 
   const {
     showNotification,
-    searchAigramChat,
+    searchGroupChat,
     openChat,
     joinChannel,
   } = getActions();
@@ -124,7 +124,7 @@ const AiGramTaskItem: FC<StateProps & OwnProps> = (props) => {
       }
     } else if (taskInfo.type === TaskType.FOLLOW) {
       if (!isInApp) {
-        await searchAigramChat({ name: GROUP_NAME });
+        await searchGroupChat({ name: GROUP_NAME });
         openChat({ id: GROUP_CHAT_ID });
         joinChannel({ chatId: GROUP_CHAT_ID });
         onCompleteJoinTask();
@@ -163,8 +163,8 @@ const AiGramTaskItem: FC<StateProps & OwnProps> = (props) => {
 export default memo(withGlobal<OwnProps>(
   (global): StateProps => {
     return {
-      isInApp: global.aigramIsInApp,
+      isInApp: global.dineroIsInApp,
       currentUserInfo: global.currentUserId ? selectUser(global, global.currentUserId) : undefined
     };
   },
-)(AiGramTaskItem));
+)(TaskItemComp));

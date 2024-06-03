@@ -72,13 +72,12 @@ import type {
   ApiWebPage,
   ApiWebSession,
 } from '../api/types';
-import type { TaskItem } from '../components/left/aigram/AiGramTaskItem';
+import type { TaskItem } from '../components/left/dinero/TaskItem';
 import type { ApiCredentials } from '../components/payment/PaymentModal';
 import type { FoldersActions } from '../hooks/reducers/useFoldersReducer';
 import type { ReducerAction } from '../hooks/useReducer';
 import type { P2pMessage } from '../lib/secret-sauce';
 import type {
-  AiGramPageStatus,
   ApiInvoiceContainer,
   ApiPrivacyKey,
   ApiPrivacySettings,
@@ -100,6 +99,7 @@ import type {
   MediaViewerOrigin,
   NewChatMembersProgress,
   NotifyException,
+  PageStatus,
   PaymentStep,
   PerformanceType,
   PrivacyVisibility,
@@ -737,16 +737,16 @@ export type GlobalState = {
     isLoading?: boolean;
   };
 
-  // aigram
-  aigramIsInApp: boolean;
+  // dinero
+  dineroIsInApp: boolean;
   mainTabStatus?: MainTabStatus;
-  aigramPageStatus: AiGramPageStatus;
-  aigramTokenFromApp?: string;
-  aigramTaskList?: TaskItem[];
-  aigramTotalScore: number;
-  aigramHasSigned: number;
-  aigramTodaySigned: boolean;
-  aigramInviteCode: string;
+  pageStatus: PageStatus;
+  dineroTokenFromApp?: string;
+  dineroTaskList?: TaskItem[];
+  dineroTotalScore: number;
+  dineroHasSigned: number;
+  dineroTodaySigned: boolean;
+  dineroInviteCode: string;
 
   // TODO Move to `auth`.
   isLoggingOut?: boolean;
@@ -1047,15 +1047,15 @@ export interface ActionPayloads {
   };
   goToAuthQrCode: undefined;
 
-  // aigram
-  initAigramFromApp: undefined;
+  // dinero
+  initDineroFromApp: undefined;
   changeMainTabStatus: { newTab: MainTabStatus };
-  updateShowAigramScoreDetail: { showScoreDetail: boolean };
-  initAigramTaskList: { taskList: TaskItem[] };
-  updateAigramTotalScore: { score: number };
-  updateAigramInviteCode: { code: string };
-  updateAigramSignedInfo: { hasSigned?: number; todaySigned?: boolean };
-  searchAigramChat: { name: string };
+  updateShowDineroScoreDetail: { showScoreDetail: boolean };
+  initDineroTaskList: { taskList: TaskItem[] };
+  updateDineroTotalScore: { score: number };
+  updateDineroInviteCode: { code: string };
+  updateDineroSignedInfo: { hasSigned?: number; todaySigned?: boolean };
+  searchGroupChat: { name: string };
 
   // stickers & GIFs
   setStickerSearchQuery: { query?: string } & WithTabId;

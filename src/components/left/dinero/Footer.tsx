@@ -6,18 +6,18 @@ import { MainTabStatus } from "../../../types";
 
 import buildClassName from "../../../util/buildClassName";
 
-import './AiGramFooter.scss';
+import './Footer.scss';
 
-import Home from '../../../assets/aigram/aigram_home.png';
-import HomeActive from '../../../assets/aigram/aigram_home_active.png';
-import TaskActive from '../../../assets/aigram/aigram_task.png';
-import Task from '../../../assets/aigram/aigram_task_disabled.png';
+import Home from '../../../assets/dinero/home.png';
+import HomeActive from '../../../assets/dinero/home_active.png';
+import Task from '../../../assets/dinero/task.png';
+import TaskActive from '../../../assets/dinero/task_active.png';
 
 interface StateProps {
   mainTabStatus: MainTabStatus;
 };
 
-const AiGramFooter: FC<StateProps> = ({
+const Footer: FC<StateProps> = ({
   mainTabStatus
 }) => {
   const {
@@ -32,10 +32,10 @@ const AiGramFooter: FC<StateProps> = ({
 
   return (
     <div
-      id="AiGram_Footer"
+      id="Custom_Footer"
       className={buildClassName(
-        "AiGram_Footer",
-        mainTabStatus === MainTabStatus.AiGram && "aigram"
+        "Custom_Footer",
+        mainTabStatus === MainTabStatus.Task && "task"
       )}
     >
       <div
@@ -51,15 +51,15 @@ const AiGramFooter: FC<StateProps> = ({
         Chats
       </div>
       <div
-        className={buildClassName("tab__item", mainTabStatus === MainTabStatus.AiGram && "active")}
-        onClick={() => handleChangeTabStatus(MainTabStatus.AiGram)}
+        className={buildClassName("tab__item", mainTabStatus === MainTabStatus.Task && "active")}
+        onClick={() => handleChangeTabStatus(MainTabStatus.Task)}
       >
         <img
           className="tab__item-icon"
           alt="Chats"
-          src={mainTabStatus === MainTabStatus.AiGram ? TaskActive : Task}
+          src={mainTabStatus === MainTabStatus.Task ? TaskActive : Task}
         />
-        AiGram
+        Dinero
       </div>
     </div>
   );
@@ -71,4 +71,4 @@ export default memo(withGlobal(
       mainTabStatus: global.mainTabStatus || MainTabStatus.TeleGram,
     };
   },
-)(AiGramFooter));
+)(Footer));

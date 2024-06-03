@@ -1,4 +1,4 @@
-#AiGram_Footer {
+#Custom_Footer {
   width: 100%;
   height: calc(var(--safe-area-bottom) + 3.125rem);
   border-top: 0.0625rem solid var(--color-borders);
@@ -12,7 +12,7 @@
 
   transition: background-color 200ms ease-in-out;
 
-  &.aigram {
+  &.task {
     background-color: #17191D;
     border-top-color: #2B2D36;
 

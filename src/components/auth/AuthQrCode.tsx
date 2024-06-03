@@ -191,9 +191,9 @@ const AuthCode: FC<StateProps> = ({
           />
         </div>
         {/* <h1>{lang('Login.QR.Title')}</h1> */}
-        <h1>Log in to AiGram by QR Code</h1>
+        <h1>Log in to Dinero by QR Code</h1>
         <ol>
-          <li><span>Open AiGram on your phone</span></li>
+          <li><span>Open Dinero on your phone</span></li>
           <li><span>{renderText(lang('Login.QR2.Help2'), ['simple_markdown'])}</span></li>
           <li><span>{lang('Login.QR.Help3')}</span></li>
         </ol>

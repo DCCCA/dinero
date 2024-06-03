@@ -2,23 +2,23 @@ import { type FC,memo, useCallback, useEffect } from "../../../lib/teact/teact";
 import React from "../../../lib/teact/teact";
 import { getActions, withGlobal } from "../../../global";
 
-import type { TaskItem } from "./AiGramTaskItem";
-import { AiGramPageStatus } from "../../../types";
+import type { TaskItem } from "./TaskItem";
+import { PageStatus } from "../../../types";
 
 import { LAYERS_ANIMATION_NAME } from "../../../util/windowEnvironment";
 import { getTaskInfo, getTaskList } from "../../../api/axios/task";
 
 import Button from "../../ui/Button";
 import Transition from "../../ui/Transition";
-import AiGramDailyItem from './AiGramDailyItem';
-import AiGramFooter from "./AiGramFooter";
-import AiGramTaskItem, { TaskType } from "./AiGramTaskItem";
-import AiGramScoreDetail from "./scoreDetail/AiGramScoreDetail";
+import DailyItem from './DailyItem';
+import Footer from "./Footer";
+import ScoreDetail from "./scoreDetail/ScoreDetail";
+import TaskItemComp, { TaskType } from "./TaskItem";
 
-import './AiGramTask.scss';
+import './Task.scss';
 
-import AIScoreBtnIcon from '../../../assets/aigram/score.png';
-import AITips from '../../../assets/aigram/score_q.png';
+import AIScoreBtnIcon from '../../../assets/dinero/score.png';
+import AITips from '../../../assets/dinero/score_q.png';
 
 
 interface StateProps {
@@ -28,14 +28,14 @@ interface StateProps {
   inviteCode: string;
   taskList: TaskItem[];
   isInApp: boolean;
-  pageStatus: AiGramPageStatus;
+  pageStatus: PageStatus;
 };
 
 const DAILY_NUM = 7;
 
 const DAILY_NORMAL_LIST: Array<undefined> = [undefined, undefined,undefined,undefined,undefined, undefined];
 
-const AiGramTask: FC<StateProps> = ({
+const TaskComp: FC<StateProps> = ({
   score,
   hasSigned,
   todayHasSigned,
@@ -45,11 +45,11 @@ const AiGramTask: FC<StateProps> = ({
   pageStatus,
 }) => {
   const {
-    initAigramTaskList,
-    updateAigramInviteCode,
-    updateAigramSignedInfo,
-    updateAigramTotalScore,
-    updateShowAigramScoreDetail,
+    initDineroTaskList,
+    updateDineroInviteCode,
+    updateDineroSignedInfo,
+    updateDineroTotalScore,
+    updateShowDineroScoreDetail,
   } = getActions();
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const AiGramTask: FC<StateProps> = ({
     try {
       const res = await getTaskInfo();
 
-      updateAigramTotalScore({score: res.total_score || 0});
-      updateAigramInviteCode({code: res.invite_code || ''});
+      updateDineroTotalScore({score: res.total_score || 0});
+      updateDineroInviteCode({code: res.invite_code || ''});
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(e);
@@ -77,7 +77,7 @@ const AiGramTask: FC<StateProps> = ({
 
       (res || []).forEach(task => {
         if (task.task_info.id === TaskType.DAILY) {
-          updateAigramSignedInfo({
+          updateDineroSignedInfo({
             hasSigned: task?.finish_count || 0,
             todaySigned: !!task.today_finished
           });
@@ -91,7 +91,7 @@ const AiGramTask: FC<StateProps> = ({
         }
       });
 
-      initAigramTaskList({ taskList: tmpTaskList });
+      initDineroTaskList({ taskList: tmpTaskList });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.log(e);
@@ -99,11 +99,11 @@ const AiGramTask: FC<StateProps> = ({
   }
 
   function handleToDetail () {
-    updateShowAigramScoreDetail({ showScoreDetail: true });
+    updateShowDineroScoreDetail({ showScoreDetail: true });
   }
 
   const handleCompleteDaily = useCallback(() => {
-    updateAigramSignedInfo({
+    updateDineroSignedInfo({
       hasSigned: hasSigned + 1,
       todaySigned: true
     });
@@ -112,12 +112,12 @@ const AiGramTask: FC<StateProps> = ({
 
   function renderIndex () {
     return (
-      <div id="AiGram_Task" className="aigram__task">
-        <div className="aigram__task-header">
-          <div className="aigram__task-header-title">AiGram</div>
-          <div className="aigram__task-header-detail" onClick={handleToDetail}>Points Details</div>
+      <div className="task">
+        <div className="task-header">
+          <div className="task-header-title">Dinero</div>
+          <div className="task-header-detail" onClick={handleToDetail}>Points Details</div>
         </div>
-        <div className="aigram__task-main">
+        <div className="task-main">
           <div className="total__score">
             <div className="total__score-detail">
               <div className="total__score-detail-title">
@@ -137,7 +137,7 @@ const AiGramTask: FC<StateProps> = ({
               <div className="daily__table-sublist">
                 {
                   DAILY_NORMAL_LIST.map((_, index) => (
-                    <AiGramDailyItem
+                    <DailyItem
                       hasSigned={hasSigned}
                       todayHasSigned={todayHasSigned}
                       today={index}
@@ -147,7 +147,7 @@ const AiGramTask: FC<StateProps> = ({
                 }
               </div>
               <div className="daily__table-target">
-                <AiGramDailyItem
+                <DailyItem
                   hasSigned={hasSigned}
                   todayHasSigned={todayHasSigned}
                   today={DAILY_NUM - 1}
@@ -159,7 +159,7 @@ const AiGramTask: FC<StateProps> = ({
           <div className="task__list">
             {
               taskList.map(task => (
-                <AiGramTaskItem key={task.type} taskInfo={task} inviteCode={inviteCode} />
+                <TaskItemComp key={task.type} taskInfo={task} inviteCode={inviteCode} />
               ))
             }
             <div className="more-task">
@@ -168,7 +168,7 @@ const AiGramTask: FC<StateProps> = ({
           </div>
         </div>
         {
-          !isInApp && <AiGramFooter />
+          !isInApp && <Footer />
         }
       </div>
     );
@@ -176,8 +176,8 @@ const AiGramTask: FC<StateProps> = ({
 
   function renderContent() {
     switch (pageStatus) {
-      case AiGramPageStatus.ScoreDetail:
-        return <AiGramScoreDetail />;
+      case PageStatus.ScoreDetail:
+        return <ScoreDetail />;
       default:
         return renderIndex();
     }
@@ -185,7 +185,7 @@ const AiGramTask: FC<StateProps> = ({
 
   return (
     <Transition
-      id="AigramTask"
+      id="TaskComp"
       name={LAYERS_ANIMATION_NAME}
       activeKey={pageStatus}
     >{renderContent}</Transition>
@@ -195,13 +195,13 @@ const AiGramTask: FC<StateProps> = ({
 export default memo(withGlobal(
   (global): StateProps => {
     return {
-      score: global.aigramTotalScore,
-      hasSigned: global.aigramHasSigned,
-      todayHasSigned: global.aigramTodaySigned,
-      inviteCode: global.aigramInviteCode,
-      taskList: global.aigramTaskList || [],
-      isInApp: global.aigramIsInApp,
-      pageStatus: global.aigramPageStatus,
+      score: global.dineroTotalScore,
+      hasSigned: global.dineroHasSigned,
+      todayHasSigned: global.dineroTodaySigned,
+      inviteCode: global.dineroInviteCode,
+      taskList: global.dineroTaskList || [],
+      isInApp: global.dineroIsInApp,
+      pageStatus: global.pageStatus,
     };
   },
-)(AiGramTask));
+)(TaskComp));

@@ -1,6 +1,6 @@
 import type { PerformanceType } from '../types';
 import type { GlobalState, TabState } from './types';
-import { AiGramPageStatus, NewChatMembersProgress } from '../types';
+import { NewChatMembersProgress,PageStatus } from '../types';
 
 import {
   ANIMATION_LEVEL_DEFAULT,
@@ -273,15 +273,15 @@ export const INITIAL_GLOBAL_STATE: GlobalState = {
     isHidden: false,
   },
 
-  // aigram
-  aigramIsInApp: false,
-  aigramPageStatus: AiGramPageStatus.Index,
-  aigramTokenFromApp: '',
-  aigramTotalScore: 0,
-  aigramHasSigned: 0,
-  aigramTodaySigned: false,
-  aigramTaskList: [],
-  aigramInviteCode: '',
+  // dinero
+  dineroIsInApp: false,
+  pageStatus: PageStatus.Index,
+  dineroTokenFromApp: '',
+  dineroTotalScore: 0,
+  dineroHasSigned: 0,
+  dineroTodaySigned: false,
+  dineroTaskList: [],
+  dineroInviteCode: '',
 };
 
 export const INITIAL_TAB_STATE: TabState = {
